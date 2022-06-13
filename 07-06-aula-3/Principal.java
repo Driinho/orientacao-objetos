@@ -12,6 +12,7 @@ public class Principal {
     int op;
 
     do {
+      limparTerminal();
       op = menu();
 
       switch (op) {
@@ -22,7 +23,7 @@ public class Principal {
         case 2:
           System.out.print("\nValor para sacar: ");
           valor = scan.nextDouble();
-          conta.sacar(valor);
+          conta.sacar(valor, conta);
           break;
 
         case 3:
@@ -32,7 +33,8 @@ public class Principal {
           break;
 
         case 4:
-          System.out.print("\nSeu salde e de " + conta.saldo);
+          System.out.print("\nSeu salde e de R$ " + conta.saldo + "\nDigite 1 para voltar.");
+          scan.nextInt();
           break;
 
         case 5:
@@ -49,12 +51,13 @@ public class Principal {
   public static int menu() {
 
     int op;
-
-    System.out.println("\n1) Criar conta");
+    System.out.println("==================================");
+    System.out.println("1) Criar conta");
     System.out.println("2) Sacar");
     System.out.println("3) Depositar");
     System.out.println("4) Visualizar saldo");
     System.out.println("5) Sair");
+    System.out.println("==================================");
     System.out.print("Escolha uma das opcoes: ");
     op = scan.nextInt();
 
@@ -62,6 +65,8 @@ public class Principal {
   }
 
   public static ContaCorrente criarConta(ContaCorrente conta) {
+
+    limparTerminal();
 
     System.out.print("Numero da Conta: ");
     conta.numeroDaConta = scan.nextInt();
@@ -73,8 +78,15 @@ public class Principal {
     conta.senha = scan.next();
     System.out.print("Digite o saldo: ");
     conta.saldo = scan.nextDouble();
+    System.out.print("Conta criada com sucesso !!!");
     conta.ativa = true;
 
     return conta;
+  }
+
+  public static void limparTerminal() {
+    for(int i = 0; i < 100; i++){
+      System.out.println();
+    }
   }
 }
