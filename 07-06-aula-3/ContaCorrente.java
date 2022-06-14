@@ -2,18 +2,79 @@ import java.util.Scanner;
 
 public class ContaCorrente {
 
-    int numeroDaConta;
-    int agencia;
-    String documento;
-    String senha;
-    boolean ativa;
-    double saldo;
+    private int numeroDaConta;
+    private int agencia;
+    private String documento;
+    private String senha;
+    private boolean ativa;
+    private double saldo;
 
-    void depositar(double valor) {
+    public ContaCorrente(){
+    }
+
+    public ContaCorrente(int numeroDaConta, int agencia, String documento, String senha, double saldo){
+        this.numeroDaConta = numeroDaConta;
+        this.agencia = agencia;
+        this.documento = documento;
+        this.senha = senha;
+        this.saldo = saldo;
+        this.ativa = true;
+    }
+
+    public ContaCorrente(int numeroDaConta, int agencia, String documento, String senha) {
+        this.numeroDaConta = numeroDaConta;
+        this.agencia = agencia;
+        this.documento = documento;
+        this.senha = senha;
+        this.saldo = 0.0;
+        this.ativa = false;
+    }
+
+    public int getNumeroDaConta() {
+        return numeroDaConta;
+    }
+
+    public void setNumeroDaConta(int numeroDaConta) {
+        this.numeroDaConta = numeroDaConta;
+    }
+
+    public int getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(int agencia) {
+        this.agencia = agencia;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public boolean isAtiva() {
+        return ativa;
+    }
+
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
+    }
+
+    public void depositar(double valor) {
         saldo = saldo + valor;
     }
 
-    void sacar(double valor, ContaCorrente conta) {
+    public void sacar(double valor, ContaCorrente conta) {
         Scanner scan = new Scanner(System.in);
         if(valor > saldo) {
 
@@ -28,5 +89,14 @@ public class ContaCorrente {
         }    
         saldo = saldo - valor;
         
+    }
+
+    public String toString() {
+
+        String str;
+        str = "\nSeu salde e de R$ " +  this.saldo;
+        str = str + "\nDigite 1 para voltar: ";
+
+        return str;
     }
 }

@@ -1,4 +1,3 @@
-import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.util.Scanner;
 
 public class Principal {
@@ -8,8 +7,8 @@ public class Principal {
     public static void main(String[] args) {
 
         ContaCorrente conta;
-        double valor;
         conta = new ContaCorrente();
+        double valor;
         int op;
 
         do {
@@ -18,11 +17,11 @@ public class Principal {
 
             switch (op) {
                 case 1:
-                    criarConta(conta);
+                    conta = criarConta(conta);
                 break;
 
                 case 2:
-                    if(conta.agencia == 0) {
+                    if(conta.getAgencia() == 0) {
                         System.out.println("\nNao existe uma conta criada !! (Digite 1 para voltar)");
                         scan.nextInt();
                     } else {
@@ -34,7 +33,7 @@ public class Principal {
                 break;
 
                 case 3:
-                    if(conta.agencia == 0) {
+                    if(conta.getAgencia() == 0) {
                         System.out.println("\nNao existe uma conta criada !! (Digite 1 para voltar)");
                         scan.nextInt();
                     } else {
@@ -45,11 +44,11 @@ public class Principal {
                 break;
 
                 case 4:
-                    if(conta.agencia == 0) {
+                    if(conta.getAgencia() == 0) {
                         System.out.println("Nao existe uma conta criada !! (Digite 1 para voltar)");   
                         scan.nextInt(); 
                     } else {
-                        System.out.print("\nSeu salde e de R$ " + conta.saldo + "\nDigite 1 para voltar: ");
+                        System.out.println(conta.toString());
                         scan.nextInt();
                     }
                 break;
@@ -83,20 +82,43 @@ public class Principal {
 
     public static ContaCorrente criarConta(ContaCorrente conta) {
 
+        int aux = 0;
+        boolean esc = false;
+        int numeroDaConta, agencia;
+        String documento, senha;
+        double saldo;
         limparTerminal();
 
         System.out.print("Numero da Conta: ");
-        conta.numeroDaConta = scan.nextInt();
+        numeroDaConta = scan.nextInt();
         System.out.print("Numero da agencia: ");
-        conta.agencia = scan.nextInt();
-        System.out.print("Numero da Documento: ");
-        conta.documento = scan.next();
+        agencia = scan.nextInt();
+        System.out.print("Documento: ");
+        documento = scan.next();
         System.out.print("Digite a Senha: ");
-        conta.senha = scan.next();
-        System.out.print("Digite o saldo: ");
-        conta.saldo = scan.nextDouble();
-        System.out.print("Conta criada com sucesso !!!");
-        conta.ativa = true;
+        senha = scan.next();
+        do{
+            System.out.print("Deseja fazer um deposito ? (1 - Sim / 0 - Nao): ");
+            aux = scan.nextInt();
+
+            if(aux > 1 || aux < 0) {
+                System.out.println("Opcao nao existe!");
+            }
+
+        }while (aux > 1 || aux < 0);
+
+        if(aux == 1) {
+            esc = true;
+        }
+        
+        if(esc == true) {
+            System.out.print("Digite o saldo: ");
+            saldo = scan.nextDouble();
+            conta = new ContaCorrente(numeroDaConta, agencia, documento, senha, saldo);
+        } else {
+            System.out.print("Conta criada com sucesso !!!");
+            conta = new ContaCorrente(numeroDaConta, agencia, documento, senha);
+        }
 
         return conta;
     }
