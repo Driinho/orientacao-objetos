@@ -98,11 +98,7 @@ public class ContaCorrente {
     public String toString() {
 
         String str;
-<<<<<<< HEAD
         str = "\nSeu saldo e de R$ " +  this.saldo;
-=======
-        str = "\nSeu saldo e de R$ " + this.saldo;
->>>>>>> 7036985b42cb897b1561ace68febdaf6ccdb5dfc
         str = str + "\nDigite 1 para voltar: ";
 
         return str;
