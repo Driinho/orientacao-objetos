@@ -9,10 +9,10 @@ public class ContaCorrente {
     private boolean ativa;
     private double saldo;
 
-    public ContaCorrente(){
+    public ContaCorrente() {
     }
 
-    public ContaCorrente(int numeroDaConta, int agencia, String documento, String senha, double saldo){
+    public ContaCorrente(int numeroDaConta, int agencia, String documento, String senha, double saldo) {
         this.numeroDaConta = numeroDaConta;
         this.agencia = agencia;
         this.documento = documento;
@@ -71,30 +71,38 @@ public class ContaCorrente {
     }
 
     public void depositar(double valor) {
+        if (ativa == false) {
+            setAtiva(true);
+        }
         saldo = saldo + valor;
     }
 
     public void sacar(double valor, ContaCorrente conta) {
         Scanner scan = new Scanner(System.in);
-        if(valor > saldo) {
+        if (valor > saldo) {
 
             do {
-    
+
                 if (valor > saldo) {
-                    System.out.print("Saldo indisponivel, seu saldo e de R$ " + conta.saldo + "  (0 Para cancelar saque)\nQuanto deseja sacar: ");
+                    System.out.print("Saldo indisponivel, seu saldo e de R$ " + conta.saldo
+                            + "  (0 Para cancelar saque)\nQuanto deseja sacar: ");
                     valor = scan.nextDouble();
-                } 
-                
-            } while(valor > saldo || valor == -1);
-        }    
+                }
+
+            } while (valor > saldo || valor == -1);
+        }
         saldo = saldo - valor;
-        
+
     }
 
     public String toString() {
 
         String str;
+<<<<<<< HEAD
         str = "\nSeu saldo e de R$ " +  this.saldo;
+=======
+        str = "\nSeu saldo e de R$ " + this.saldo;
+>>>>>>> 7036985b42cb897b1561ace68febdaf6ccdb5dfc
         str = str + "\nDigite 1 para voltar: ";
 
         return str;
